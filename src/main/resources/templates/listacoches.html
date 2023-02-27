@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/styles.css}" rel="stylesheet"/>
+<title>Listado de Coches</title>
+</head>
+<body>
+	<div th:replace="~{fragments/header ::header}"></div>
+	<h1>LISTADO DE COCHES</h1>
+	<a th:href="@{coche/nuevo}" class="btn btn-success">Añadir</a>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Matricula</th>
+				<th scope="col">Marca</th>
+				<th scope="col">Modelo</th>
+				<th scope="col">Color</th>
+				<th scope="col">Precio</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="coche : ${coches}">
+				<td scope="row" th:text="${coche.id}"></td>
+				<td scope="row" th:text="${coche.matricula}"></td>
+				<td scope="row" th:text="${coche.marca}"></td>
+				<td scope="row" th:text="${coche.modelo}"></td>
+				<td scope="row" th:text="${coche.color}"></td>
+				<td scope="row" th:text="${coche.precio}"></td>
+				<td class="actions">
+					<a th:href="@{coche/editar/{id}(id=${coche.id})}" class="btn btn-primary">Editar</a>
+					<a th:href="@{coche/borrar/{id}(id=${coche.id})}" class="btn btn-primary">Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div th:replace="~{fragments/footer ::footer}"></div>
+</body>
+</html>

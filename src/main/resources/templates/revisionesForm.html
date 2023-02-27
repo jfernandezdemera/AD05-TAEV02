@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/styles.css}" rel="stylesheet" />
+<title>Insertar revision</title>
+</head>
+<body>
+	<div th:replace="~{fragments/header ::header}"></div>
+	<form method="post" action="#" th:action="@{/revision/submit}" th:object="${revision}">
+	<input type="hidden" th:field="*{id}" id="id" />
+	<h1><span th:text="${id} ? 'Editar' : 'Nueva'"></span> revision</h1>
+	<div class="form-group required-control">
+		<input type="checkbox" value=1 name="filtro"> 
+		<label> FILTRO </label>
+	</div>
+	<div class="form-group">
+		<input type="checkbox" value=1 name="aceite"> 
+		<label> ACEITE </label>
+	</div>
+	<div class="form-group">
+		<input type="checkbox" value=1 name="frenos"> 
+		<label > FRENOS </label>
+	</div>
+	 <div class="form-group">
+	    <label for="coche">Coche</label>
+	    <select
+			th:field="*{coche.id}" class="form-control">
+			<option value="-1">---</option>
+			<option th:each="coche : ${coches}" th:value="${coche.id}" th:text="${coche.matricula}">Coche</option>
+		</select>
+  	</div>
+		<button type="submit" class="btn-primaty">Aceptar</button>
+	</form>
+	<div th:replace="~{fragments/footer ::footer}"></div>
+</body>
+</html>

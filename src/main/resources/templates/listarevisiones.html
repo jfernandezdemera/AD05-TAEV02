@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/styles.css}" rel="stylesheet"/>
+<title>Listado de Coches</title>
+</head>
+<body>
+	<div th:replace="~{fragments/header ::header}"></div>
+	<h1>LISTADO DE REVISIONES</h1>
+	<a th:href="@{revision/nuevo}" class="btn btn-success">Añadir</a>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">Filtro</th>
+				<th scope="col">Aceite</th>
+				<th scope="col">Frenos</th>
+				<th scope="col">Matricula Coche</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="revision : ${revisiones}">
+				<td scope="row" th:text="${revision.id}"></td>
+				<td scope="row" th:text="${revision.filtro}"></td>
+				<td scope="row" th:text="${revision.aceite}"></td>
+				<td scope="row" th:text="${revision.frenos}"></td>
+				<td scope="row" th:if="${revision.coche}" th:text="${revision.coche.matricula}"></td>
+				<td class="actions">
+					<a th:href="@{revision/editar/{id}(id=${revision.id})}" class="btn btn-primary">Editar</a>
+					<a th:href="@{revision/borrar/{id}(id=${revision.id})}" class="btn btn-primary">Borrar</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div th:replace="~{fragments/footer ::footer}"></div>
+</body>
+</html>
